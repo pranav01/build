@@ -257,6 +257,13 @@ endif
 			TARGET_UNIFIED_DEVICE="$(TARGET_UNIFIED_DEVICE)" \
 			$(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
+	$(if $(ADDITIONAL_BUILD_PROPERTIES), \
+		$(hide) echo >> $@; \
+		        echo "#" >> $@; \
+		        echo "# ADDITIONAL_BUILD_PROPERTIES" >> $@; \
+		        echo "#" >> $@; )
+	$(hide) $(foreach line,$(ADDITIONAL_BUILD_PROPERTIES), \
+		echo "$(line)" >> $@;)
 	$(hide) $(foreach file,$(system_prop_file), \
 		if [ -f "$(file)" ]; then \
 			echo "#" >> $@; \
@@ -265,13 +272,6 @@ endif
 			echo "#" >> $@; \
 			cat $(file) >> $@; \
 		fi;)
-	$(if $(ADDITIONAL_BUILD_PROPERTIES), \
-		$(hide) echo >> $@; \
-		        echo "#" >> $@; \
-		        echo "# ADDITIONAL_BUILD_PROPERTIES" >> $@; \
-		        echo "#" >> $@; )
-	$(hide) $(foreach line,$(ADDITIONAL_BUILD_PROPERTIES), \
-		echo "$(line)" >> $@;)
 	$(hide) build/tools/post_process_props.py $@ "$(PRODUCT_PROPERTY_UBER_OVERRIDES)" $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_PROPERTY_BLACKLIST)
 
 build_desc :=
