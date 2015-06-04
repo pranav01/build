@@ -1038,7 +1038,6 @@ FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEP
 # system image.
 INSTALLED_FILES_FILE := $(PRODUCT_OUT)/installed-files.txt
 $(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS)
-	$(hide) ./vendor/radium/tools/changelog
 	@echo Installed file list: $@
 	@mkdir -p $(dir $@)
 	@rm -f $@
@@ -1704,7 +1703,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
-RADIUM_TARGET_PACKAGE := $(PRODUCT_OUT)/radium-$(RADIUM_VERSION).zip
+RADIUM_TARGET_PACKAGE := $(PRODUCT_OUT)/Team-$(RADIUM_VERSION).zip
 
 .PHONY: otapackage radium
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
