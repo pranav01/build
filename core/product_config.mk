@@ -179,9 +179,9 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
-# A RADIUM build needs only the RADIUM product makefiles.
+# A Radium build needs only the Radium product makefiles.
 ifneq ($(RADIUM_BUILD),)
-  all_product_configs := $(shell ls device/*/$(RADIUM_BUILD)/radium.mk)
+  all_product_configs := $(shell find device -path "*/$(RADIUM_BUILD)/radium.mk")
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
