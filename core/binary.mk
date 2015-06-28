@@ -100,33 +100,6 @@ endif
 ifeq ($(TARGET_USE_PIPE),true)
 include $(BUILD_SYSTEM)/pipe.mk
 endif
-# Include custom gcc flags.  Seperate them so they can be easily managed.
-ifeq ($(STRICT_ALIASING),true)
-include $(BUILD_SYSTEM)/strict.mk
-endif
-
-ifeq (strip $(STRICT_ALIASING)),true)
-include $(BUILD_SYSTEM)/strict.mk
-endif
-
-ifeq ($(strip $(KRAIT_OPTIMIZATIONS)),true)
-ifndef LOCAL_IS_HOST_MODULE
-include $(BUILD_SYSTEM)/krait.mk
-endif
-endif
-
-ifeq ($(strip $(GRAPHITE_OPTI)),true)
-ifeq (linux,$(HOST_OS))
-ifeq (1,$(words $(filter arm arm64,$(TARGET_ARCH))))
-# Do not use graphite on host modules or the clang compiler
-ifndef LOCAL_IS_HOST_MODULE
-ifndef LOCAL_CLANG
-include $(BUILD_SYSTEM)/graphite.mk
-endif
-endif
-endif
-endif
-endif
 
 # The following LOCAL_ variables will be modified in this file.
 # Because the same LOCAL_ variables may be used to define modules for both 1st arch and 2nd arch,
