@@ -904,8 +904,10 @@ else
         build/target/product/security/radium-devkey
 endif
 
+ifeq ($(strip $(ROM_OPTIS)),true)
 # ArchiDroid
 include $(BUILD_SYSTEM)/archidroid.mk
+endif
 
 # Generate a file containing the keys that will be read by the
 # recovery binary.

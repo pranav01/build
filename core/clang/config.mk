@@ -35,11 +35,13 @@ CLANG_CONFIG_EXTRA_CFLAGS :=
 CLANG_CONFIG_EXTRA_CPPFLAGS :=
 CLANG_CONFIG_EXTRA_LDFLAGS :=
 
+ifeq ($(strip $(ROM_OPTIS)),true)
 # ArchiDroid
 include $(BUILD_SYSTEM)/archidroid.mk
 CLANG_CONFIG_EXTRA_CFLAGS += $(ARCHIDROID_CLANG_CFLAGS)
 CLANG_CONFIG_EXTRA_CPPFLAGS += $(ARCHIDROID_CLANG_CPPFLAGS)
 CLANG_CONFIG_EXTRA_LDFLAGS += $(ARCHIDROID_CLANG_LDFLAGS)
+endif
 
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -D__compiler_offsetof=__builtin_offsetof
@@ -53,6 +55,7 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
 CLANG_CONFIG_EXTRA_CFLAGS += \
   -Wno-unused-command-line-argument
 
+ifeq ($(strip $(ROM_OPTIS)),true)
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
   $(ARCHIDROID_CLANG_UNKNOWN_FLAGS) \
   -funswitch-loops \
@@ -65,6 +68,20 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -Wno-maybe-uninitialized \
   -Wno-error=maybe-uninitialized \
   -fno-canonical-system-headers
+else
+CLANG_CONFIG_UNKNOWN_CFLAGS := \
+  -funswitch-loops \
+  -fno-tree-sra \
+  -finline-limit=64 \
+  -Wno-psabi \
+  -Wno-unused-but-set-variable \
+  -Wno-unused-but-set-parameter \
+  -Wmaybe-uninitialized \
+  -Wno-maybe-uninitialized \
+  -Wno-error=maybe-uninitialized \
+  -fno-canonical-system-headers
+endif
+
 
 # Clang flags for all host rules
 CLANG_CONFIG_HOST_EXTRA_ASFLAGS :=
