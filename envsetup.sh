@@ -529,7 +529,7 @@ function brunch()
 function breakfast()
 {
     target=$1
-    local variant=$2
+    local variant="user"
     RADIUM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
@@ -551,7 +551,7 @@ function breakfast()
         else
             # This is probably just the RADIUM model name
             if [ -z "$variant" ]; then
-                variant="userdebug"
+                variant="user"
             fi
             lunch radium_$target-$variant
         fi
