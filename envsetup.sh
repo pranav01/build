@@ -13,7 +13,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - mmp:     Builds all of the modules in the current directory and pushes them to the device.
 - mmmp:    Builds all of the modules in the supplied directories and pushes them to the device.
 - mmma:    Builds all of the modules in the supplied directories, and their dependencies.
-- cgrep:   Greps on all local C/C++ files.
+- cgrep:   Greps on all local C/C++ files.z
 - ggrep:   Greps on all local Gradle files.
 - jgrep:   Greps on all local Java files.
 - resgrep: Greps on all local res/*.xml files.
@@ -529,7 +529,7 @@ function brunch()
 function breakfast()
 {
     target=$1
-    local variant="user"
+    local variant="$2"
     RADIUM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
@@ -551,7 +551,7 @@ function breakfast()
         else
             # This is probably just the RADIUM model name
             if [ -z "$variant" ]; then
-                variant="user"
+                variant="userdebug"
             fi
             lunch radium_$target-$variant
         fi
