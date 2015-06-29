@@ -13,7 +13,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - mmp:     Builds all of the modules in the current directory and pushes them to the device.
 - mmmp:    Builds all of the modules in the supplied directories and pushes them to the device.
 - mmma:    Builds all of the modules in the supplied directories, and their dependencies.
-- cgrep:   Greps on all local C/C++ files.z
+- cgrep:   Greps on all local C/C++ files.
 - ggrep:   Greps on all local Gradle files.
 - jgrep:   Greps on all local Java files.
 - resgrep: Greps on all local res/*.xml files.
