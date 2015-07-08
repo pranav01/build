@@ -126,7 +126,8 @@ TARGET_RELEASE_CFLAGS := \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
 			-frerun-cse-after-loop \
-			-frename-registers
+			-frename-registers \
+			-Wno-error=array-bounds
 
 libc_root := bionic/libc
 libm_root := bionic/libm
